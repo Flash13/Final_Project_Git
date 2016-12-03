@@ -5,7 +5,7 @@
 #include "input_error.h"
 #include <ctype.h>
 
-//file sent is open
+//file sent is open!
 void loadroom(FILE *file,Square *room)
 {
 	//array for finish coordinates
