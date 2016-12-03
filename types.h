@@ -26,6 +26,6 @@ int y;
 
 //?FILE instead of char?
 Square* createroom(FILE* filename);
-void loadroom(FILE* filename,Square *room);
+void loadroom(FILE* filename,Square *room, Robot*, Obstacle*, Obstacle*);
 Obstacle* loadob(FILE* fptr);
 int obmotion(Obstacle* object);

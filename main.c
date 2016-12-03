@@ -11,15 +11,17 @@ int main(int argc, char* argv[])
 {
 if(argc!=2)
 return 0;
-
-FILE* fp = fopen(argv[1], "r");
-Square* room = createroom(fp);
-	loadroom(fp,room);
-printf("Object 1s new spot: %d",obmotion(ob1));	
-
+	FILE* fp = fopen(argv[1], "r");
+	Square* room = createroom(fp);
+	Robot *bot = malloc(sizeof(Robot));
+	Obstacle *ob1 = malloc(sizeof(Obstacle));
+	Obstacle *ob2 = malloc(sizeof(Obstacle));
+		
+		loadroom(fp,room, bot, ob1, ob2);
+		printf("Object 1s new spot: %d",obmotion(ob1));	
 return 0;
 }
-//gay
+
 
 Square* createroom(FILE* file)
 {

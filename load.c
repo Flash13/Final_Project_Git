@@ -6,17 +6,21 @@
 #include <ctype.h>
 
 //file sent is open!
-void loadroom(FILE *fp,Square *room)
+void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 {
+	//Need to make bot, ob1, and ob2 global in the main?
+
 	//array for finish coordinates
 	int finish[2];
-	int size;
+	int roomsize;
 	
-	Robot* bot = malloc(sizeof(Robot));	
-	Obstacle* ob1 = malloc(sizeof(Obstacle));
-	Obstacle* ob2 = malloc(sizeof(Obstacle));
+	//these were declared in main.c
+	bot = malloc(sizeof(Robot));	
+	ob1 = malloc(sizeof(Obstacle));
+	ob2 = malloc(sizeof(Obstacle));
 	
-	fscanf(fp, "%d\n", &size);
+	//simple, easy fscanfs
+	fscanf(fp, "%d\n", &roomsize);
 	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
 	fscanf(fp, "(%d,%d)\n", &finish[0], &finish[1]);
 	fscanf(fp, "(%d,%d)\n", &ob1->x, &ob1->y);
@@ -25,13 +29,16 @@ void loadroom(FILE *fp,Square *room)
 	fscanf(fp, "(%d,%d)\n", &ob2->x, &ob2->y);
 	fscanf(fp, "%d\n", &ob2->speed);
 	fscanf(fp, "(%d,%d)\n", &ob2->ns, &ob2->ew);
+	//%d reads in the '+' and '-' as part of the int
 	
-	
+	//what the heckie is this?
 	printf("\n(%d,%d)\n" , ob1->speed , ob2->speed);
 }
 
+//We don't need this but I guess we kept it just in case?
+
 //sent an open file. correct file position?
-Obstacle* loadob(FILE* file)
+/*Obstacle* loadob(FILE* file)
 {
 	char*garbage = malloc(sizeof(char)*2);
 	char*hold = malloc(sizeof(char)*2);
@@ -46,12 +53,12 @@ Obstacle* loadob(FILE* file)
 	//scanned in the roomsize already.start at line 2
 	fscanf(file,"(%d,%d)",&object->x,&object->y);
 	fscanf(file,"%d",&object->speed);
-	/*char* token;
+	//char* token;
 	int x;
-	int y;*/
-	fscanf(file,"%s",hold);
+	int y;
+	//fscanf(file,"%s",hold);
 	//token = strtok(hold , "(,)");
-	/*
+	
 	printf("\nToken: %s\n",token);
 	char c[1];
 	c[0] = token[0];
@@ -60,6 +67,6 @@ Obstacle* loadob(FILE* file)
 	printf("\nToken2: %s\n",token);
 	c[0] = token[0];
 	y = atoi(c);
-	printf("x = %d y = %d\n" ,x,y );*/
+	printf("x = %d y = %d\n" ,x,y );
 return object;
-}        
+} */       
