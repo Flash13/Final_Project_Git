@@ -1,7 +1,7 @@
 CFLAGS = -g -Wall -Werror
 
 all: main
-main: main.o
+main: main.o load.o move.o
 	gcc $^ -g -o main
 
 %.o: %.c input_error.h types.h
