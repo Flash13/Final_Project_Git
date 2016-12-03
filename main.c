@@ -4,6 +4,7 @@
 #include "types.h"
 #include "input_error.h"
 #include <ctype.h>
+int roomsize;
 
 //ABBY WAS HERE
 int main(int argc, char* argv[])
@@ -14,6 +15,8 @@ return 0;
 FILE* fp = fopen(argv[1], "r");
 Square* room = createroom(fp);
 	loadroom(fp,room);
+printf("Object 1s new spot: %d",obmotion(ob1));	
+
 return 0;
 }
 //gay
@@ -21,7 +24,6 @@ return 0;
 Square* createroom(FILE* file)
 {
 	//FILE *fptr;
-	int roomsize;
 	//	if((fptr=fopen(file,"r"))==NULL)
 	//		exit(FILE_FAILED_TO_OPEN);
 		
