@@ -12,13 +12,12 @@ void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 
 	//array for finish coordinates
 	int finish[2];
-	int size;
 	
 	bot = malloc(sizeof(Robot));	
 	ob1 = malloc(sizeof(Obstacle));
 	ob2 = malloc(sizeof(Obstacle));
 	
-	fscanf(fp, "%d\n", &size);
+	fscanf(fp, "%d\n", &roomsize);
 	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
 	fscanf(fp, "(%d,%d)\n", &finish[0], &finish[1]);
 	fscanf(fp, "(%d,%d)\n", &ob1->x, &ob1->y);
