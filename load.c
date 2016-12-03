@@ -31,7 +31,7 @@ void loadroom(FILE *fp,Square *room)
 }
 
 //sent an open file. correct file position?
-Obstacle* loadob(FILE* file)
+/*Obstacle* loadob(FILE* file)
 {
 	char*garbage = malloc(sizeof(char)*2);
 	char*hold = malloc(sizeof(char)*2);
@@ -46,12 +46,12 @@ Obstacle* loadob(FILE* file)
 	//scanned in the roomsize already.start at line 2
 	fscanf(file,"(%d,%d)",&object->x,&object->y);
 	fscanf(file,"%d",&object->speed);
-	/*char* token;
+	//char* token;
 	int x;
-	int y;*/
-	fscanf(file,"%s",hold);
+	int y;
+	//fscanf(file,"%s",hold);
 	//token = strtok(hold , "(,)");
-	/*
+	
 	printf("\nToken: %s\n",token);
 	char c[1];
 	c[0] = token[0];
@@ -60,6 +60,6 @@ Obstacle* loadob(FILE* file)
 	printf("\nToken2: %s\n",token);
 	c[0] = token[0];
 	y = atoi(c);
-	printf("x = %d y = %d\n" ,x,y );*/
+	printf("x = %d y = %d\n" ,x,y );
 return object;
-}        
+} */       
