@@ -12,7 +12,8 @@ void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 
 	//array for finish coordinates
 	int finish[2];
-	
+	int roomsize;
+
 	bot = malloc(sizeof(Robot));	
 	ob1 = malloc(sizeof(Obstacle));
 	ob2 = malloc(sizeof(Obstacle));
