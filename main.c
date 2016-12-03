@@ -16,7 +16,7 @@ Square* room = createroom(fp);
 	loadroom(fp,room);
 return 0;
 }
-
+//gay
 
 Square* createroom(FILE* file)
 {
