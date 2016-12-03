@@ -19,7 +19,13 @@ int x;
 int y;
 } Robot;
 
+typedef struct path{
+int x;
+int y;
+} Path;
+
 //?FILE instead of char?
 Square* createroom(FILE* filename);
 void loadroom(FILE* filename,Square *room);
 Obstacle* loadob(FILE* fptr);
+int obmotion(Obstacle* object);
