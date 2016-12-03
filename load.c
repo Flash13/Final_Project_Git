@@ -13,11 +13,13 @@ void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 	//array for finish coordinates
 	int finish[2];
 	int roomsize;
-
+	
+	//these were declared in main.c
 	bot = malloc(sizeof(Robot));	
 	ob1 = malloc(sizeof(Obstacle));
 	ob2 = malloc(sizeof(Obstacle));
 	
+	//simple, easy fscanfs
 	fscanf(fp, "%d\n", &roomsize);
 	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
 	fscanf(fp, "(%d,%d)\n", &finish[0], &finish[1]);
@@ -27,10 +29,13 @@ void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 	fscanf(fp, "(%d,%d)\n", &ob2->x, &ob2->y);
 	fscanf(fp, "%d\n", &ob2->speed);
 	fscanf(fp, "(%d,%d)\n", &ob2->ns, &ob2->ew);
+	//%d reads in the '+' and '-' as part of the int
 	
-	
+	//what the heckie is this?
 	printf("\n(%d,%d)\n" , ob1->speed , ob2->speed);
 }
+
+//We don't need this but I guess we kept it just in case?
 
 //sent an open file. correct file position?
 /*Obstacle* loadob(FILE* file)
