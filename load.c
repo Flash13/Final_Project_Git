@@ -24,7 +24,7 @@ void loadroom(FILE *fp,Square *room)
 	fscanf(fp, "(%d,%d)\n", &ob1->ns, &ob1->ew);
 	fscanf(fp, "(%d,%d)\n", &ob2->x, &ob2->y);
 	fscanf(fp, "%d\n", &ob2->speed);
-	fscanf(fp, "(%d,%d)", &ob2->ns, &ob2->ew);
+	fscanf(fp, "(%d,%d)\n", &ob2->ns, &ob2->ew);
 	
 	
 	printf("\n(%d,%d)\n" , ob1->speed , ob2->speed);
