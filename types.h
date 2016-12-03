@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+//dont forget to put other libraries if you need them
+
 typedef struct sq{
 int check;
 } Square;
@@ -15,6 +19,7 @@ int x;
 int y;
 } Robot;
 
-Square** createroom(char* filename);
-void loadroom(char* filename,Square**room);
-Obstacle loadob(FILE* fptr);
+//?FILE instead of char?
+Square* createroom(FILE* filename);
+void loadroom(FILE* filename,Square *room);
+Obstacle* loadob(FILE* fptr);
