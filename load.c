@@ -6,15 +6,17 @@
 #include <ctype.h>
 
 //file sent is open!
-void loadroom(FILE *fp,Square *room)
+void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 {
+	//Need to make bot, ob1, and ob2 global in the main?
+
 	//array for finish coordinates
 	int finish[2];
 	int size;
 	
-	Robot* bot = malloc(sizeof(Robot));	
-	Obstacle* ob1 = malloc(sizeof(Obstacle));
-	Obstacle* ob2 = malloc(sizeof(Obstacle));
+	bot = malloc(sizeof(Robot));	
+	ob1 = malloc(sizeof(Obstacle));
+	ob2 = malloc(sizeof(Obstacle));
 	
 	fscanf(fp, "%d\n", &size);
 	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
