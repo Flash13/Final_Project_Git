@@ -6,21 +6,26 @@
 #include <ctype.h>
 
 //file sent is open!
-void loadroom(FILE *file,Square *room)
+void loadroom(FILE *fp,Square *room)
 {
 	//array for finish coordinates
 	int finish[2];
+	int size;
 	
-	//char roomsize;
-	//fscanf(file,"%c",&roomsize);
+	Robot* bot = malloc(sizeof(Robot));	
+	Obstacle* ob1 = malloc(sizeof(Obstacle));
+	Obstacle* ob2 = malloc(sizeof(Obstacle));
 	
-	Robot* bot = malloc(sizeof(Robot));
+	fscanf(fp, "%d\n", &size);
+	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
+	fscanf(fp, "(%d,%d)\n", &finish[0], &finish[1]);
+	fscanf(fp, "(%d,%d)\n", &ob1->x, &ob1->y);
+	fscanf(fp, "%d\n", &ob1->speed);
+	fscanf(fp, "(%d,%d)\n", &ob1->ns, &ob1->ew);
+	fscanf(fp, "(%d,%d)\n", &ob2->x, &ob2->y);
+	fscanf(fp, "%d\n", &ob2->speed);
+	fscanf(fp, "(%d,%d)\n", &ob2->ns, &ob2->ew);
 	
-	fscanf(file,"(%d,%d)",&bot->x,&bot->y);
-	fscanf(file,"(%d,%d)",&finish[0],&finish[1]);
-	
-	Obstacle* ob1 = loadob(file);
-	Obstacle* ob2 = loadob(file);
 	
 	printf("\n(%d,%d)\n" , ob1->speed , ob2->speed);
 }
