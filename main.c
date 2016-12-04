@@ -8,8 +8,9 @@
 //ABBY WAS HERE
 int main(int argc, char* argv[])
 {
-if(argc!=2)
-return 0;
+	if(argc!=2)
+			exit(INCORRECT_NUMBER_OF_COMMAND_LINE_ARGUMENTS);
+
 	FILE* fp = fopen(argv[1], "r");
 	Square* room = createroom(fp);
 	Robot *bot = malloc(sizeof(Robot));
@@ -21,6 +22,8 @@ return 0;
 	int new2 = obmotion(ob2,room);
 		room[new1].check = 1;
 	    room[new2].check = 1;
+		
+//FREE AND CLOSE IF NEED BE
 	    	
 return 0;
 }
