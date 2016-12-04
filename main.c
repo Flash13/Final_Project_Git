@@ -4,7 +4,6 @@
 #include "types.h"
 #include "input_error.h"
 #include <ctype.h>
-int roomsize;
 
 //ABBY WAS HERE
 int main(int argc, char* argv[])
@@ -16,9 +15,13 @@ return 0;
 	Robot *bot = malloc(sizeof(Robot));
 	Obstacle *ob1 = malloc(sizeof(Obstacle));
 	Obstacle *ob2 = malloc(sizeof(Obstacle));
-		
 		loadroom(fp,room, bot, ob1, ob2);
-		printf("Object 1s new spot: %d",obmotion(ob1));	
+	
+	int new1 = obmotion(ob1,room);
+	int new2 = obmotion(ob2,room);
+		room[new1].check = 1;
+	    room[new2].check = 1;
+	    	
 return 0;
 }
 
@@ -32,7 +35,9 @@ Square* createroom(FILE* file)
 	fscanf(file,"%d",&roomsize);	
 	int size = (roomsize*roomsize);
 	Square* room = malloc(sizeof(Square)*size);
-	
+	int i;
+	for(i=0;i<size;i++)
+	room[i].check = 0;
 	//if(fclose(fptr)!=0)
 	//	exit(FILE_FAILED_TO_CLOSE);
 return room;
