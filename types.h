@@ -27,6 +27,7 @@ int y;
 int roomsize;
 
 Square* createroom(FILE* filename);
-void loadroom(FILE* filename,Square *room, Robot*, Obstacle*, Obstacle*);
+void loadroom(FILE* filename,Square *room, Robot*, Obstacle*, Obstacle*, Path*);
 Obstacle* loadob(FILE* fptr);
 int obmotion(Obstacle* object,Square *room);
+int robotmotion(Square *room, Robot *bot, Obstacle* ob1, Obstacle* ob2, Path* exit);

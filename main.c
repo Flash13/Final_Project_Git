@@ -15,13 +15,21 @@ return 0;
 	Robot *bot = malloc(sizeof(Robot));
 	Obstacle *ob1 = malloc(sizeof(Obstacle));
 	Obstacle *ob2 = malloc(sizeof(Obstacle));
-		loadroom(fp,room, bot, ob1, ob2);
-	
-	int new1 = obmotion(ob1,room);
-	int new2 = obmotion(ob2,room);
-		room[new1].check = 1;
+	Path *exit = malloc(sizeof(Path));
+		loadroom(fp,room, bot, ob1, ob2, exit);
+	int new1;
+	int new2;
+	int stop = 0;
+	while(stop != 1)
+		{
+	    new1 = obmotion(ob1,room);
+	    new2 = obmotion(ob2,room);
+		room[new1].check = 1;//Means obstacle is moving to this position
 	    room[new2].check = 1;
-	    	
+		stop = robotmotion(room,bot,ob1,ob2,exit);
+		printf("\nRobot Position: (%d,%d)",bot->x,bot->y);
+		}
+		printf("\nRobot Position: (%d,%d) Exit Position: (%d,%d)\n",bot->x,bot->y,exit->x,exit->y);
 return 0;
 }
 

@@ -37,3 +37,38 @@ case changing the objects movement direction
 	 
 return newspot;	 
 }
+int robotmotion(Square* room, Robot* bot,Obstacle* ob1,Obstacle* ob2, Path* exit)
+{
+int xcheck = bot->x;
+int ycheck = bot->y;
+int stop = ((exit->x-1)*roomsize+((exit->y)-1));
+int hold;
+ 		if(bot->y < exit->y)
+ 		{	
+ 			if(ob1->y != ycheck+1 && ob2->y != ycheck+1)
+ 		       bot->y++;
+ 		}
+ 		if(bot->y > exit->y)
+ 		{
+ 			if(ob1->y != ycheck-1 && ob2->y != ycheck-1)
+ 			   bot->y--;
+ 		}
+ 	
+ 		if(bot->x < exit->x)
+ 		{	
+ 			if(ob1->y != xcheck+1 && ob2->y != xcheck+1)
+ 		       bot->x++;
+ 		}
+ 		if(bot->x > exit->x)
+ 		{
+ 			if(ob1->y != xcheck-1 && ob2->y != xcheck-1)
+ 				bot->x--;
+ 		}
+		
+		
+ 	hold = ((bot->x-1)*roomsize+((bot->y)-1));
+ 	if(hold == stop)
+       return 1;
+    else
+       return 0;
+}
