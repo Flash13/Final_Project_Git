@@ -14,3 +14,4 @@ pathLen++;
 Path = realloc(Path, pathLen);
 *(Path+(pathLen-1))->x = (x of new step);
 *(Path+(pathLen-1))->y = (y of new step);
+0
