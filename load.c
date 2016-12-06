@@ -10,7 +10,7 @@ void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
 {
 	//Need to make bot, ob1, and ob2 global in the main?
 
-	//array for finish coordinates
+	//array for finish coordinates, I'm not sure if we use them here, I think this is just a hold variable
 	int finish[2];
 	
 	//simple, easy fscanfs
