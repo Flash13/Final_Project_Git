@@ -8,6 +8,9 @@
 
 void checkFormat(FILE *fp) {
 	
+	if(fp == NULL)
+		exit(PARSING_ERROR_EMPTY_FILE);
+	
 	int length = 0;
 	
 	fseek(fp , 0 , SEEK_END);
@@ -22,24 +25,29 @@ void checkFormat(FILE *fp) {
 	
 	char *block = malloc(sizeof(char) * length);//block has bytes not spaces and length is in spaces so we need to have enough bytes
 	
-	char *line = strtok(block , "\n");//strtok caches a pointer for itself where it leaves off every time
+	char *line = malloc(sizeof(char));
+	
+	line = strtok(block , "\n");//strtok caches a pointer for itself where it leaves off every time
 									  //so next time, null in place of block to leave off at the 
 									  //same spot and a line using array notation can be used like line[i] to check a character
-	int roomsize = 0 , i = 0;
+	int i = 0;
 	
 	//might actually need to convert the number with atoi and not just assume isdigit will work like this//also change down below in code too if need be
 	//might throw the printf and exit if it hits the newline
 
 	//first check if the whole first line are numbers
-	//while(isdigit(line[i]) != 0)	{
+	while(isdigit(*line) != 0)	{
 		printf("First line is: %s" , line);
 		i++;
-	//}
+	}
 	
 	i = 0;
 	
 	//then convert it to an actual number. issue with newline at end?
-	//roomsize = atoi(line);
+	roomsize = atoi(line);
+	
+	if(roomsize < 1)
+		exit(PARSING_ERROR_IMPROPER_VALUE);
 	
 	//2nd line
 	line = strtok(NULL , "," );
@@ -200,8 +208,10 @@ void checkFormat(FILE *fp) {
 		line = strtok(NULL , "\n");
 	}
 	
-	//rewind(file); dont need it since we arent messing with
-	//the actual file. only fp which is a copy
+	free(line);
+	free(block);
+	rewind(fp); //got to fix it for later use so it points back
+	//to the front
 }	
 
 //get rid of printfs when done
@@ -212,6 +222,5 @@ void checkFormat(FILE *fp) {
 //call parse in main and include it
 //free each prev line before i scan in a new one?
 //check for return value on fgets for errors
-//if any numbers go outside of the grid like if a room is
-//10 by 10 and a coordinate is 11
-//could fgets using the amount of characters that i know will be in each line
+//could fgets using the amount of characters 
+//that i know will be in each line
