@@ -111,7 +111,7 @@ int botstay =  ((xcheck)-1)*roomsize+((ycheck)-1);//if bot stays
 			 }
 			 
 		}	
- 	new = ((bot->x-1)*roomsize+((bot->y)-1));
+ 	new = ((bot->x)-1)*roomsize+((bot->y)-1);
  	if(new == stop)
        return 1;
     else

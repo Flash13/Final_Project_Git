@@ -3,25 +3,32 @@
 //dont forget to put other libraries if you need them
 
 typedef struct obstacle{
-int speed;
-int x;
-int y;
-int ns;
-int ew;
+	int speed;
+	int x;
+	int y;
+	int ns;
+	int ew;
 } Obstacle;
 
 typedef struct robot{
-int x;
-int y;
+	int x;
+	int y;
 } Robot;
 
 typedef struct path{
-int x;
-int y;
+	int x;
+	int y;
 } Path;
+
+typedef struct node{
+	int x;
+	int y;
+}Step;
 
 int roomsize;
 void loadroom(FILE* filename, Robot*, Obstacle*, Obstacle*, Path*);
 Obstacle* loadob(FILE* fptr);
 void obmotion(Obstacle* object);
 int robotmotion(Robot *bot, Obstacle* ob1, Obstacle* ob2, Path* exit);
+int addToPath(Step *Path, int pathLen, int newX, int newY); //in path.c
+
