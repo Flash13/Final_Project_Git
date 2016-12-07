@@ -5,13 +5,10 @@
 #include "input_error.h"
 #include <ctype.h>
 
-int obmotion(Obstacle* object,Square* room)
+void obmotion(Obstacle* object)
 {
- int position = (object->x-1)*roomsize+((object->y)-1);//Objects current positon before motion
- room[position].check = 0;//Set that object is moving positions by setting its current square to "0"
 	int xmove;
 	int ymove;
-	int newspot;//Objects new spot (x,y) converted to spot in a one-dimensional array (ex: A[newspot])
 		if(object->x == roomsize && object->ns == 1)
 			object->ns = (object->ns)*(-1);  
 	    if(object->x == 1 && object->ns == -1)
@@ -33,7 +30,90 @@ case changing the objects movement direction
 	 ymove = (object->speed)*(object->ew);//where and at what speed object will move horizontally
 	 object->x = (object->x)+(xmove);// objects new "x" position
 	 object->y = (object->y)+(ymove);// objects new "y" position 
-	 newspot = ((object->x-1)*roomsize+((object->y)-1));//formula for finding objects new position in one-dimensional array
-	 
-return newspot;	 
+}
+int robotmotion(Robot* bot,Obstacle* ob1,Obstacle* ob2, Path* exit)
+{
+int new;
+int xcheck = bot->x;
+int ycheck = bot->y;
+int stop = ((exit->x)-1)*roomsize+((exit->y)-1);//exits position
+int hold1 = ((ob1->x)-1)*roomsize+((ob1->y)-1);//objects position
+int hold2 = ((ob2->x)-1)*roomsize+((ob2->y)-1);//objects position
+int checker = 0;//makes sure robot only moves once a turn
+int boteast = ((xcheck)-1)*roomsize+((ycheck+1)-1);//if bot moves east
+int botnorth = ((xcheck-1)-1)*roomsize+((ycheck)-1);//if bot moves north
+int botwest = ((xcheck)-1)*roomsize+((ycheck-1)-1);//if bot moves west
+int botsouth = ((xcheck+1)-1)*roomsize+((ycheck)-1);//if bot moves south
+int botstay =  ((xcheck)-1)*roomsize+((ycheck)-1);//if bot stays
+ 		if(bot->y < exit->y)//checks if exit is east of robot
+ 		{	
+ 			if(hold1 != boteast && hold2 != boteast)
+ 		     {
+ 		       bot->y++;
+ 			   checker++;
+ 			 }
+ 		}
+ 		if(bot->y > exit->y && checker == 0)//checks if exit is west of robot
+ 		{
+ 			if(hold1 != botwest && hold2 != botwest)
+ 			  {
+ 			   bot->y--;
+ 		   	   checker++;
+ 			  }
+ 		}
+ 	
+ 		if(bot->x < exit->x && checker == 0)//checks if exit is south of robot
+ 		{	
+ 			if(hold1 != botsouth && hold2 != botsouth)
+ 		      	{
+ 		       bot->x++;
+ 		       checker++;
+ 				}
+ 		}
+ 		if(bot->x > exit->x && checker == 0)//checks if exit is north of robot
+ 		{
+ 			if(hold1 != botnorth && hold2 != botnorth)
+ 				{
+ 				bot->x--;
+ 		        checker++;
+ 				}
+ 		}
+		if(hold1 == botstay || hold2 == botstay)
+		{
+			if(hold1 != botwest && hold2 != botwest)
+			{
+				if(checker == 0 && ycheck != 1)
+				  {
+				  bot->y--;
+				  checker++;
+				  }
+			} 
+			if(hold1 != botnorth && hold2 != botnorth)
+			{
+				if(checker == 0 && xcheck != 1)
+				  {
+				  bot->x--;
+				  checker++;
+				  }
+			} 
+			if(hold1 != boteast && hold2 != boteast)
+			{
+				if(checker == 0 && (ycheck) != roomsize)
+				  {
+				  bot->y++;
+				  checker++;
+				  }
+			} 
+			if(hold1 != botsouth && hold2 != botsouth)
+			{
+			 if(checker == 0 && (xcheck) != roomsize)
+				 bot->x++; 
+			 }
+			 
+		}	
+ 	new = ((bot->x)-1)*roomsize+((bot->y)-1);
+ 	if(new == stop)
+       return 1;
+    else
+       return 0;
 }

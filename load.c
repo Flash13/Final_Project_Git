@@ -6,17 +6,16 @@
 #include <ctype.h>
 
 //file sent is open!
-void loadroom(FILE *fp,Square *room,Robot* bot, Obstacle* ob1, Obstacle* ob2)
+void loadroom(FILE *fp,Robot* bot, Obstacle* ob1, Obstacle* ob2, Path* exit)
 {
 	//Need to make bot, ob1, and ob2 global in the main?
 
-	//array for finish coordinates, I'm not sure if we use them here, I think this is just a hold variable
-	int finish[2];
+
 	
 	//simple, easy fscanfs
 	fscanf(fp, "%d\n", &roomsize);
 	fscanf(fp, "(%d,%d)\n", &bot->x, &bot->y);
-	fscanf(fp, "(%d,%d)\n", &finish[0], &finish[1]);
+	fscanf(fp, "(%d,%d)\n", &exit->x, &exit->y);
 	fscanf(fp, "(%d,%d)\n", &ob1->x, &ob1->y);
 	fscanf(fp, "%d\n", &ob1->speed);
 	fscanf(fp, "(%d,%d)\n", &ob1->ns, &ob1->ew);

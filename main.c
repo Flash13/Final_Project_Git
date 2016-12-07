@@ -8,40 +8,23 @@
 //ABBY WAS HERE
 int main(int argc, char* argv[])
 {
-	if(argc!=2)
-			exit(INCORRECT_NUMBER_OF_COMMAND_LINE_ARGUMENTS);
-
+if(argc!=2)
+return 0;
 	FILE* fp = fopen(argv[1], "r");
-	Square* room = createroom(fp);
 	Robot *bot = malloc(sizeof(Robot));
 	Obstacle *ob1 = malloc(sizeof(Obstacle));
 	Obstacle *ob2 = malloc(sizeof(Obstacle));
-		loadroom(fp,room, bot, ob1, ob2);
-	
-	int new1 = obmotion(ob1,room);
-	int new2 = obmotion(ob2,room);
-		room[new1].check = 1;
-	    room[new2].check = 1;
-		
-//FREE AND CLOSE IF NEED BE
-	    	
+	Path *exit = malloc(sizeof(Path));
+		loadroom(fp, bot, ob1, ob2, exit);
+	int stop = 0;
+		printf("\nRobot Starting Position: (%d,%d)",bot->x,bot->y);
+	while(stop != 1)
+		{
+	    obmotion(ob1);
+	    obmotion(ob2);
+		stop = robotmotion(bot,ob1,ob2,exit);
+		printf("\nRobot Position: (%d,%d)",bot->x,bot->y);
+		}
+		printf("\nExit Position: (%d,%d)\n",exit->x,exit->y);
 return 0;
-}
-
-
-Square* createroom(FILE* file)
-{
-	//FILE *fptr;
-	//	if((fptr=fopen(file,"r"))==NULL)
-	//		exit(FILE_FAILED_TO_OPEN);
-		
-	fscanf(file,"%d",&roomsize);	
-	int size = (roomsize*roomsize);
-	Square* room = malloc(sizeof(Square)*size);
-	int i;
-	for(i=0;i<size;i++)
-	room[i].check = 0;
-	//if(fclose(fptr)!=0)
-	//	exit(FILE_FAILED_TO_CLOSE);
-return room;
 }
