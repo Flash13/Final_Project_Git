@@ -35,4 +35,3 @@ return 0;
 		printf("\nExit Position: (%d,%d)\n",exit->x,exit->y);
 return 0;
 }
-
