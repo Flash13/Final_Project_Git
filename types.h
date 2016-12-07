@@ -31,4 +31,4 @@ Obstacle* loadob(FILE* fptr);
 void obmotion(Obstacle* object);
 int robotmotion(Robot *bot, Obstacle* ob1, Obstacle* ob2, Path* exit);
 int addToPath(Step *Path, int pathLen, int newX, int newY); //in path.c
-
+void checkFormat(FILE *fp);
