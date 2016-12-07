@@ -205,11 +205,9 @@ void checkFormat(FILE *fp) {
 }	
 
 //get rid of printfs when done
-//libraries
 //use fgets and fgetc if strtok doesnt work
-//could read in each line length with a helper line length function
+//could read in each line length with a helper line length function or fseekend to get total file length to put it all in a string
 //free and rewind if need be
-//send strtok NULL or file?
 //also check for empty lines
 //call parse in main and include it
 //free each prev line before i scan in a new one?

@@ -11,6 +11,12 @@ int main(int argc, char* argv[])
 if(argc!=2)
 return 0;
 	FILE* fp = fopen(argv[1], "r");
+	
+	if(fp == NULL)
+		exit(FILE_FAILED_TO_OPEN);
+	
+	checkFormat(fp);
+	
 	Robot *bot = malloc(sizeof(Robot));
 	Obstacle *ob1 = malloc(sizeof(Obstacle));
 	Obstacle *ob2 = malloc(sizeof(Obstacle));
