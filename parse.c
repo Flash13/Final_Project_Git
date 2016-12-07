@@ -8,8 +8,11 @@
 
 void checkFormat(FILE *fp) {
 	
-	if(fp == NULL)
-		exit(PARSING_ERROR_EMPTY_FILE);
+	//Check if file is empty
+    int c = fgetc(fp);
+    if (c==EOF)
+       exit(PARSING_ERROR_EMPTY_FILE);
+    ungetc(c,fp);
 	
 	int length = 0;
 	
@@ -25,21 +28,30 @@ void checkFormat(FILE *fp) {
 	
 	char *block = malloc(sizeof(char) * length);//block has bytes not spaces and length is in spaces so we need to have enough bytes
 	
+	fgets(block , 0 ,fp);
+	
+	while(!block) {
+	printf("%c" , *block);
+	block++;
+	}
+	//not mallocing space need for each line?
 	char *line = malloc(sizeof(char));
 	
 	line = strtok(block , "\n");//strtok caches a pointer for itself where it leaves off every time
-									  //so next time, null in place of block to leave off at the 
-									  //same spot and a line using array notation can be used like line[i] to check a character
+								//so next time, null in place of block to leave off at the 
+								//same spot and a line using array notation can be used like line[i] to check a character
+	if(line == NULL)
+		exit(PARSING_ERROR_EMPTY_FILE);
+	
 	int i = 0;
+	
+	printf("Line is: %s" , line);
 	
 	//might actually need to convert the number with atoi and not just assume isdigit will work like this//also change down below in code too if need be
 	//might throw the printf and exit if it hits the newline
 
 	//first check if the whole first line are numbers
-	while(isdigit(*line) != 0)	{
-		printf("First line is: %s" , line);
-		i++;
-	}
+	//put a check here using atoi or isdigit
 	
 	i = 0;
 	
