@@ -8,11 +8,14 @@
 
 void checkFormat(FILE *fp) {
 	
+	printf("%p",fp);
+	
 	//Check if file is empty
     int c = fgetc(fp);
-    if (c==EOF)
+    if (c == EOF)
        exit(PARSING_ERROR_EMPTY_FILE);
-    ungetc(c,fp);
+	
+	printf("%p",fp);
 	
 	int length = 0;
 	
@@ -28,46 +31,77 @@ void checkFormat(FILE *fp) {
 	
 	char *block = malloc(sizeof(char) * length);//block has bytes not spaces and length is in spaces so we need to have enough bytes
 	
-	fgets(block , 0 ,fp);
+	printf("\nLength is: %d\n" , length);
 	
+	int status = fread(block , sizeof(char) , length * sizeof(char) , fp);
+	
+	printf("\nStatus:%d \n\nNum Elements: %lu\n" , status , length*sizeof(char));
+	
+	int i = 0; //, x = 0, q = 0;
+	/*
+	while(isdigit(block[i]) != 0 && q != 3) {
+		i++;
+		x++;
+		printf("%p" , fp);
+		fp++;
+		printf("%p" , fp);
+		q++;
+	}*/
+	
+	fgets(block , status ,fp);
+	/*
 	while(!block) {
-	printf("%c" , *block);
-	block++;
-	}
+		printf("%c" , *block);
+		block++;
+	}*/
 	//not mallocing space need for each line?
 	char *line = malloc(sizeof(char));
 	
 	line = strtok(block , "\n");//strtok caches a pointer for itself where it leaves off every time
 								//so next time, null in place of block to leave off at the 
 								//same spot and a line using array notation can be used like line[i] to check a character
+	printf("\nLine is: %s\n" , line);
+	
 	if(line == NULL)
 		exit(PARSING_ERROR_EMPTY_FILE);
 	
-	int i = 0;
+	i = 0;
 	
-	printf("Line is: %s" , line);
+	int linelen = strlen(line);
+	printf("Linelen: %d" , linelen);
 	
-	//might actually need to convert the number with atoi and not just assume isdigit will work like this//also change down below in code too if need be
 	//might throw the printf and exit if it hits the newline
-
-	//first check if the whole first line are numbers
-	//put a check here using atoi or isdigit
+	//first check if the whole first line has only numbers
+	while(i <= linelen) {
+		printf("\nStuck here\n");
+		printf("\nCharacter is: %c\n" , line[i]);
+		
+		if(isdigit(line[i]) == 0) {
+			exit(PARSING_ERROR_INVALID_FORMAT);
+			i++;
+		}
+		
+		i++;
+	}
+	
+	printf("After whileloop");
 	
 	i = 0;
 	
 	//then convert it to an actual number. issue with newline at end?
 	roomsize = atoi(line);
 	
-	if(roomsize < 1)
+	//roomsize cant be less than 2 because there are 3 things to place.this would make movement impossible but hey its a valid roomsize
+	if(roomsize < 2)
 		exit(PARSING_ERROR_IMPROPER_VALUE);
 	
-	//2nd line
+	//2nd line. Reads in first coordinate
 	line = strtok(NULL , "," );
 	
 	int count = 2 , check = 0;//2 because we read in the bot start&&exit
 	
 	while(count != 0) {
-		if(*line != '(')
+		if(line[i] != '(')
 			exit(PARSING_ERROR_INVALID_FORMAT);
 		
 		i++;
