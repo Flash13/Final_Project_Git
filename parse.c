@@ -65,26 +65,30 @@ void checkFormat(FILE *fp) {
 	if(line == NULL)
 		exit(PARSING_ERROR_EMPTY_FILE);
 	
-	i = 0;
-	
 	int linelen = strlen(line);
-	printf("Linelen: %d" , linelen);
+	printf("\nLinelen: %d\n" , linelen);
 	
 	//might throw the printf and exit if it hits the newline
 	//first check if the whole first line has only numbers
-	while(i <= linelen) {
-		printf("\nStuck here\n");
-		printf("\nCharacter is: %c\n" , line[i]);
+	//using int i causes it to be a local variable to this for only
+	for(i = 0;i < linelen;i++) {
 		
-		if(isdigit(line[i]) == 0) {
-			exit(PARSING_ERROR_INVALID_FORMAT);
-			i++;
+		if(i != linelen) {
+			printf("\nStuck here\n");
+			printf("\nCharacter is: %c\n" , line[i]);
+		
+			if(isdigit(line[i]) == 0 && line[i] != '\n') {
+				printf("\nExiting\n");
+				exit(PARSING_ERROR_INVALID_FORMAT);
+				i++;
+			}
 		}
 		
-		i++;
+		else
+			break;
 	}
 	
-	printf("After whileloop");
+	printf("\nAfter whileloop\n");
 	
 	i = 0;
 	
@@ -98,27 +102,63 @@ void checkFormat(FILE *fp) {
 	//2nd line. Reads in first coordinate
 	line = strtok(NULL , "," );
 	
-	int count = 2 , check = 0;//2 because we read in the bot start&&exit
+	int count = 2;//2 because we read in the bot start&&exit
+	
+	i = 0;
 	
 	while(count != 0) {
 		if(line[i] != '(')
 			exit(PARSING_ERROR_INVALID_FORMAT);
-		
-		i++;
+	
 		line++;//so the only thing left is the digit in line
 		
-		check = atoi(line);
-		//checking for invalid coordinates
-		if(check > roomsize || check < 1)
+		linelen = strlen(line);
+		printf("\n2 Linelen is: %d\n" , linelen);
+		printf("\n2 Line is: %s\n" , line);
+		
+		int escape = 0;
+		
+		for(i = 0;i < linelen;i++) {
+			
+			printf("\nEntered for\n");
+			
+			if(isdigit(line[i]) == 0)	{
+				printf("\n2 Line is: %s\n" , line);
+				printf("\n2 Character is: %c\n" , line[i]);
+				escape = 1;
+				break;
+			}
+		}
+		
+		if(escape == 1)
+			exit(PARSING_ERROR_INVALID_FORMAT);
+		
+		printf("for exited");
+		
+		//also combine them back when done with code
+		//this makes sense right?
+		if(roomsize < atoi(line)) {
+			printf("\natoi 1: %s\n" , line);
 			exit(PARSING_ERROR_IMPROPER_VALUE);
-
-		//reads in the rest of that line from the , to the )
+		}
+		
+		else if(atoi(line) < 1) {
+			printf("\natoi 2: %s\n" , line);
+			exit(PARSING_ERROR_IMPROPER_VALUE);
+		}
+		
+		//reads in the rest of that line from the , to the ')'
 		line = strtok(NULL , ")");
-
+		
+		if(line == NULL)
+			exit(PARSING_ERROR_EMPTY_FILE);
+		
 		while(!line) {
 			printf("%c" , line[i]);
 			i++;
 		}
+		
+		i = 0;
 		
 		//int lineLen = strlen(line);
 	
@@ -260,6 +300,7 @@ void checkFormat(FILE *fp) {
 	//to the front
 }	
 
+//reset pointer heads accordingly and reset i if need be
 //get rid of printfs when done
 //use fgets and fgetc if strtok doesnt work
 //could read in each line length with a helper line length function or fseekend to get total file length to put it all in a string
