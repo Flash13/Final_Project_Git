@@ -28,16 +28,20 @@ return 0;
 	Path *exit = malloc(sizeof(Path));
 		loadroom(fp, bot, ob1, ob2, exit);
 	int stop = 0;
-		printf("\nRobot Starting Position: (%d,%d)",bot->x,bot->y);
+		//printf("\nRobot Starting Position: (%d,%d)",bot->x,bot->y);
 	fprintf(ofp, "Robot Starting Position: (%d,%d)\n", bot->x, bot->y);
 	while(stop != 1)
 		{
 	    obmotion(ob1);
 	    obmotion(ob2);
 		stop = robotmotion(bot,ob1,ob2,exit);
-		printf("\nRobot Position: (%d,%d)",bot->x,bot->y);
+		//printf("\nRobot Position: (%d,%d)",bot->x,bot->y);
 		fprintf(ofp, "(%d,%d)\n", bot->x, bot->y);
 		}
-		printf("\nExit Position: (%d,%d)\n",exit->x,exit->y);
+		//printf("\nExit Position: (%d,%d)\n",exit->x,exit->y);
+
+free(bot);
+free(ob1);
+free(ob2);
 return 0;
 }
