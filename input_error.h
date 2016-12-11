@@ -11,5 +11,4 @@ enum error {
 	PARSING_ERROR_IMPROPER_VALUE
 };
 
-
 #endif

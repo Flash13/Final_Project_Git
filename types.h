@@ -26,6 +26,8 @@ typedef struct node{
 }Step;
 
 int roomsize;
+void parse(FILE *fp);
+void obCheck(FILE *fp , char *block , char *line);
 void loadroom(FILE* filename, Robot*, Obstacle*, Obstacle*, Path*);
 Obstacle* loadob(FILE* fptr);
 void obmotion(Obstacle* object);
